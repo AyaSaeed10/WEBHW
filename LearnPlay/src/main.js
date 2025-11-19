@@ -15,5 +15,10 @@ document.querySelector('#app').innerHTML = `
 
 /*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
 /*third update*/
+<<<<<<< HEAD
 //after exit
 //ישאוו
+=======
+//after exit 
+//last check for commit by elias
+>>>>>>> 5ea3aa29520d59eac8b2c02bc33f3df6c21eccc9

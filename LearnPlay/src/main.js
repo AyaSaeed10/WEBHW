@@ -7,3 +7,4 @@ document.querySelector('#app').innerHTML = `
     <a href="../LearnPlay/src/login.html" class="block text-center w-full p-3 mt-4 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">LogIn</a>
   </div>
 `
+/*updatessssss*/

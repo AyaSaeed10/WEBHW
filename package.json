@@ -1,0 +1,28 @@
+{
+  "name": "learnplay",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.2.2",
+     "@tailwindcss/vite": "^4.1.17",
+    "tailwindcss": "^4.1.17",
+    "prettier": "^3.8.0",
+    "@tailwindcss/aspect-ratio": "^0.5.10",
+    "@tailwindcss/forms": "^0.5.13",
+    "@tailwindcss/typography": "^0.6.8"
+
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.16",
+    "tailwindcss": "^4.1.16"
+  }
+}

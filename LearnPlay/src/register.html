@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+
+  <div class="container bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+    <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Register</h1>
+
+    <form id="registerForm" action="/src/register.html" method="post" class="space-y-3">
+      <label for="userInput" class="block font-medium text-gray-700">Username</label>
+      <input type="text" id="userInput" required class="w-full p-2 border border-gray-300 rounded">
+
+      <label for="mailInput" class="block font-medium text-gray-700">Email</label>
+      <input type="email" id="mailInput" required class="w-full p-2 border border-gray-300 rounded">
+
+      <label for="passInput" class="block font-medium text-gray-700">Password</label>
+      <input type="password" id="passInput" required class="w-full p-2 border border-gray-300 rounded">
+
+      <label for="confirmInput" class="block font-medium text-gray-700">Confirm Password</label>
+      <input type="password" id="confirmInput" required class="w-full p-2 border border-gray-300 rounded">
+
+      <label for="dateInput" class="block font-medium text-gray-700">Date of Birth</label>
+      <input type="date" id="dateInput" required class="w-full p-2 border border-gray-300 rounded">
+
+      <div id="arithmetic-captcha-container" class="space-y-2">
+        <label for="captcha-answer" class="block text-sm font-medium text-gray-700"> Solve the CAPTCHA: </label>
+        <div class="flex items-center space-x-4">
+          <span id="arithmetic-challenge" class="text-lg font-semibold text-gray-800"></span>
+          <button type="button" id="refresh-arithmetic-captcha" title="Refresh CAPTCHA">
+<img class="h-10" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/ReCAPTCHA_icon.svg/150px-ReCAPTCHA_icon.svg.png?20231023175148">
+</button>
+</div>
+  <input type="text" id="arithmetic-answer" name="arithmetic-answer" class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Enter the answer">
+    <p id="arithmetic-error" class="mt-1 text-sm text-red-500 hidden">Incorrect CAPTCHA answer.</p>
+
+
+</div>
+
+      <button type="submit" class="w-full p-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition">REGISTER</button>
+
+      <a href="login.html" class="block text-right mt-4 text-blue-500 hover:underline">Already have an account? Log in</a>
+      <p id="registerMessage" class="mt-2 text-center text-sm"></p>
+    </form>
+  </div>
+
+  <script src="captcha.js"></script>
+  <script src="users.js"></script>
+
+</body>
+</html>

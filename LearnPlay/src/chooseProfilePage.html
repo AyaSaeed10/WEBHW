@@ -24,27 +24,8 @@
 
   <!-- PROFILES SECTION -->
   <section class="max-w-4xl mx-auto mt-12">
-    <div class="flex flex-wrap justify-center gap-10">
-
-      <!-- Profile 1 -->
-      <div onclick="openPin('Emily')" class="w-40 cursor-pointer">
-        <div class="bg-white p-5 rounded-3xl shadow-lg hover:scale-105 transition relative">
-          <div class="absolute top-3 right-3 text-[#419D78] text-xl">🔒</div>
-          <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" class="w-24 mx-auto mb-3 rounded-xl">
-        </div>
-        <p class="text-center mt-3 font-bold text-xl text-[#419D78]">Emily</p>
-      </div>
-
-      <!-- Profile 2 -->
-      <div onclick="openPin('Noah')" class="w-40 cursor-pointer">
-        <div class="bg-white p-5 rounded-3xl shadow-lg hover:scale-105 transition relative">
-          <div class="absolute top-3 right-3 text-[#419D78] text-xl">🔒</div>
-          <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" class="w-24 mx-auto mb-3 rounded-xl">
-        </div>
-        <p class="text-center mt-3 font-bold text-xl text-[#419D78]">Noah</p>
-      </div>
-
-    </div>
+    <!-- כאן ניצור את הכרטיסים של הילדים דינאמית -->
+    <div id="profilesContainer" class="flex flex-wrap justify-center gap-10"></div>
   </section>
 
   <!-- PIN POPUP (MODAL) -->
@@ -56,7 +37,8 @@
 
       <h2 id="pinTitle" class="text-2xl font-bold text-[#419D78] mb-4">Enter PIN</h2>
 
-      <p class="text-gray-600 mb-6">Enter the 4-digit PIN to continue</p>
+      <p class="text-gray-600 mb-3">Enter the 4-digit PIN to continue</p>
+      <p id="pinError" class="text-red-500 text-sm mb-2 hidden">Wrong PIN, try again.</p>
 
       <div class="flex justify-center gap-3 mb-6">
         <input maxlength="1" class="pin-input w-12 h-12 text-center text-2xl font-bold border-2 border-[#7EE081] rounded-xl focus:outline-[#419D78]" />
@@ -66,6 +48,7 @@
       </div>
 
       <button 
+        id="pinContinueBtn"
         class="w-full bg-[#7EE081] text-white font-bold py-3 rounded-xl hover:brightness-110">
         Continue
       </button>
@@ -79,14 +62,128 @@
   </div>
 
 <script>
-function openPin(name) {
-  document.getElementById("pinModal").classList.remove("hidden");
-  document.getElementById("pinTitle").innerText = `${name}'s PIN`;
-}
+  // נניח שבמסך ה־login שמרת את המשתמש כך:
+  // localStorage.setItem('loggedInUser', JSON.stringify(user));
 
-function closePin() {
-  document.getElementById("pinModal").classList.add("hidden");
-}
+  let currentUser = null;       // המשתמש המחובר
+  let selectedProfile = null;   // הילד שנלחץ לפני הכנסת PIN
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadProfiles();
+    setupPinInputs();
+    document.getElementById('pinContinueBtn').addEventListener('click', handlePinSubmit);
+  });
+
+  async function loadProfiles() {
+    try {
+      // טוען את ה־db.json (שים אותו באותה תיקייה / להתאים נתיב)
+      const res = await fetch('./db.json');
+      const data = await res.json();
+
+      // להביא את המשתמש המחובר מ־localStorage
+      const savedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+      let username = savedUser?.username;
+
+      // אם אין שימור משתמש – ברירת מחדל: המשתמש הראשון במערך
+      if (!username && data.users.length > 0) {
+        username = data.users[0].username;
+      }
+
+      currentUser = data.users.find(u => u.username === username);
+
+      if (!currentUser) {
+        console.error('No logged-in user found in db.json');
+        return;
+      }
+
+      const container = document.getElementById('profilesContainer');
+      container.innerHTML = '';
+
+      currentUser.profiles.forEach((profile, index) => {
+        const card = document.createElement('div');
+        card.className = 'w-40 cursor-pointer';
+        card.addEventListener('click', () => openPin(profile));
+
+        card.innerHTML = `
+          <div class="bg-white p-5 rounded-3xl shadow-lg hover:scale-105 transition relative">
+            <div class="absolute top-3 right-3 text-[#419D78] text-xl">🔒</div>
+            <img src="https://cdn-icons-png.flaticon.com/512/2922/29225${index % 2 === 0 ? '10' : '06'}.png"
+                 class="w-24 mx-auto mb-3 rounded-xl">
+          </div>
+          <p class="text-center mt-3 font-bold text-xl text-[#419D78]">${profile.profileName}</p>
+        `;
+
+        container.appendChild(card);
+      });
+
+    } catch (err) {
+      console.error('Failed to load db.json:', err);
+    }
+  }
+
+  function openPin(profile) {
+    selectedProfile = profile;
+    document.getElementById("pinModal").classList.remove("hidden");
+    document.getElementById("pinTitle").innerText = `${profile.profileName}'s PIN`;
+    document.getElementById("pinError").classList.add("hidden");
+    clearPinInputs();
+    // פוקוס על האינפוט הראשון
+    const inputs = document.querySelectorAll('.pin-input');
+    if (inputs[0]) inputs[0].focus();
+  }
+
+  function closePin() {
+    document.getElementById("pinModal").classList.add("hidden");
+  }
+
+  function clearPinInputs() {
+    document.querySelectorAll('.pin-input').forEach(input => input.value = '');
+  }
+
+  function getEnteredPin() {
+    let pin = '';
+    document.querySelectorAll('.pin-input').forEach(input => {
+      pin += (input.value || '');
+    });
+    return pin;
+  }
+
+  function handlePinSubmit() {
+    if (!selectedProfile) return;
+
+    const enteredPin = getEnteredPin();      // מה שהילד הקליד
+    const correctPin = selectedProfile.pin;  // מה שמופיע ב-db.json
+
+    if (enteredPin === correctPin) {
+      // אפשר לשמור את הפרופיל המחובר ולעבור לדף הבא
+      localStorage.setItem('activeProfile', JSON.stringify(selectedProfile));
+      alert(`Welcome, ${selectedProfile.profileName}!`);
+      // window.location.href = 'child-dashboard.html';
+    } else {
+      const errorLabel = document.getElementById('pinError');
+      errorLabel.classList.remove('hidden');
+      clearPinInputs();
+      const inputs = document.querySelectorAll('.pin-input');
+      if (inputs[0]) inputs[0].focus();
+    }
+  }
+
+  // מעבר אוטומטי בין שדות PIN
+  function setupPinInputs() {
+    const inputs = document.querySelectorAll('.pin-input');
+    inputs.forEach((input, idx) => {
+      input.addEventListener('input', (e) => {
+        if (e.target.value.length === 1 && idx < inputs.length - 1) {
+          inputs[idx + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+          inputs[idx - 1].focus();
+        }
+      });
+    });
+  }
 </script>
 
 </body>

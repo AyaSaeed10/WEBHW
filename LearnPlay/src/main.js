@@ -2,10 +2,10 @@
 function goToPage(target){
   switch (target) {
     case "login":
-          window.location.href = "login.html";
+          window.location.href = "LearnPlay/src/login.html";
+          console.log("home page");
         break;
-    case 2:
-        
+    case "":
         break;
     case 3: 
         

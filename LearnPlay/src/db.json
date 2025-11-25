@@ -5,30 +5,29 @@
             "email": "lala@gmail.com",
             "password": "1234",
             "dob": "1990-10-13",
-		    "isAdmin": true
-        },
-        {
-            "username": "Noor",
-            "email": "Noor@gmail.com",
-            "password": "4567",
-            "dob": "1998-11-07",
-		    "isAdmin": false
-        },
-         {
-            "username": "Elias",
-            "email": "Elias@gmail.com",
-            "password": "123456",
-            "dob": "1998-11-07",
-		 "isAdmin": false
-        },
-        {
-            "username": "PUSH",
-            "email": "EEEE@gmail.com",
-            "password": "123456",
-            "dob": "1998-11-07",
-		 "isAdmin": false
+			"profiles":[
+				{
+					"profileName": "Adam",
+					"isAdmin": true,
+					"pin": "0000"
+				},
+				{
+					"profileName": "child1",
+					"isAdmin": false,
+					"pin": "0001",
+					"progress" : {},
+					"points" : "0"
+				},
+				{
+					"profileName": "child2",
+					"isAdmin": false,
+					"pin": "0001",
+					"progress" : {},
+					"points" : "0"
+				}
+
+				
+			]
         }
-        
     ]
 }
-

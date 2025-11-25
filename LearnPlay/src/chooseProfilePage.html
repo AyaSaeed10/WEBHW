@@ -9,14 +9,12 @@
     body { font-family: 'Inter', sans-serif; }
     .pin-input::-webkit-outer-spin-button,
     .pin-input::-webkit-inner-spin-button {
-      display: none;
+      display: none; 
     }
-    .pin-input { -moz-appearance: textfield; }
+    .pin-input {-moz-appearance: textfield;}
   </style>
 </head>
-
 <body class="min-h-screen bg-[#E8F9FD] flex flex-col px-4">
-
   <!-- HEADER -->
   <header class="bg-[#7EE081] py-6 shadow-md rounded-b-3xl">
     <h1 class="text-center text-4xl font-extrabold text-white">Who’s Learning Today?</h1>
@@ -148,25 +146,27 @@
     return pin;
   }
 
-  function handlePinSubmit() {
-    if (!selectedProfile) return;
+ function handlePinSubmit() {
+  if (!selectedProfile) return;
 
-    const enteredPin = getEnteredPin();      // מה שהילד הקליד
-    const correctPin = selectedProfile.pin;  // מה שמופיע ב-db.json
+  const enteredPin = getEnteredPin();      // מה שהילד הקליד
+  const correctPin = selectedProfile.pin;  // מה שמופיע ב-db.json
 
-    if (enteredPin === correctPin) {
-      // אפשר לשמור את הפרופיל המחובר ולעבור לדף הבא
-      localStorage.setItem('activeProfile', JSON.stringify(selectedProfile));
-      alert(`Welcome, ${selectedProfile.profileName}!`);
-      // window.location.href = 'child-dashboard.html';
-    } else {
-      const errorLabel = document.getElementById('pinError');
-      errorLabel.classList.remove('hidden');
-      clearPinInputs();
-      const inputs = document.querySelectorAll('.pin-input');
-      if (inputs[0]) inputs[0].focus();
-    }
+  if (enteredPin === correctPin) {
+    // שומרים את הפרופיל המחובר
+    localStorage.setItem('activeProfile', JSON.stringify(selectedProfile));
+    
+    // מעבר לדף הראשי
+    window.location.href = 'mainPage.html';  // שימי כאן את שם הקובץ שאליו את רוצה לעבור
+  } else {
+    const errorLabel = document.getElementById('pinError');
+    errorLabel.classList.remove('hidden');
+    clearPinInputs();
+    const inputs = document.querySelectorAll('.pin-input');
+    if (inputs[0]) inputs[0].focus();
   }
+}
+
 
   // מעבר אוטומטי בין שדות PIN
   function setupPinInputs() {

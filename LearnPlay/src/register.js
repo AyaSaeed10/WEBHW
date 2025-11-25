@@ -21,7 +21,7 @@ if (password !== confirmPassword) {
 }
 try {
  if(find(email)){
-      registerMessage.textContent = "Username or email already exists.";
+      registerMessage.textContent = "email already exists.";
       registerMessage.classList.remove("text-green-500");
       registerMessage.classList.add("text-red-500");
       return;

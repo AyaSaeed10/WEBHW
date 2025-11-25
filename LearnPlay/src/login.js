@@ -9,7 +9,7 @@ loginForm.addEventListener('submit', function(event) {
     let nameOrEmail = 'test';
     let pass = 'password';
     if(user != undefined){
-   nameOrEmail = user.username;
+   nameOrEmail = user.email;
    pass = user.password;
 }
 if (usernameOrEmail === nameOrEmail && password === pass) {
@@ -18,6 +18,8 @@ if (usernameOrEmail === nameOrEmail && password === pass) {
         loginMessage.classList.add('text-green-500');
         localStorage.setItem('loggedInUser', JSON.stringify(user));
         console.log("Logged in user saved:", user);
+        window.location.href = "chooseProfilePage.html";
+        console.log("Choose Profiles Page");
 
 if (user && user.isAdmin) {
   setTimeout(() => { window.location.href = 'userManagement.html'; }, 200);  
@@ -28,6 +30,7 @@ if (user && user.isAdmin) {
         loginMessage.classList.remove('text-green-500');
         loginMessage.classList.add('text-red-500');
 }
+
 
 
 })

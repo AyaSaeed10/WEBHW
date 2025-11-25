@@ -5,22 +5,17 @@
             "email": "lala@gmail.com",
             "password": "1234",
             "dob": "1990-10-13",
+			"pin": "0000",
 			"profiles":[
-				{
-					"profileName": "lala",
-					"isAdmin": true,
-					"pin": "0000"
-				},
+				
 				{
 					"profileName": "child1",
-					"isAdmin": false,
 					"pin": "0001",
 					"progress" : {},
 					"points" : "0"
 				},
 				{
 					"profileName": "child2",
-					"isAdmin": false,
 					"pin": "0002",
 					"progress" : {},
 					"points" : "0"
@@ -34,29 +29,23 @@
             "email": "hadar@gmail.com",
             "password": "5678",
             "dob": "1992-03-05",
+			"pin":"1111",
 			"profiles":[
-				{
-					"profileName": "hadar",
-					"isAdmin": true,
-					"pin": "1111"
-				},
+				
 				{
 					"profileName": "child1",
-					"isAdmin": false,
 					"pin": "0001",
 					"progress" : {},
 					"points" : "0"
 				},
 				{
 					"profileName": "child2",
-					"isAdmin": false,
 					"pin": "0002",
 					"progress" : {},
 					"points" : "0"
 				},
 				{
 					"profileName": "child3",
-					"isAdmin": false,
 					"pin": "0003",
 					"progress" : {},
 					"points" : "0"

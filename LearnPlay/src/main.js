@@ -5,7 +5,9 @@ function goToPage(target){
           window.location.href = "LearnPlay/src/login.html";
           console.log("home page");
         break;
-    case "":
+    case "Register": 
+    window.location.href = "LearnPlay/src/register.html";
+          console.log("register page");
         break;
     case 3: 
         

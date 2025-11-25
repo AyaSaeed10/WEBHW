@@ -20,7 +20,7 @@ function find(nameOrMail){
     if(users.length==0) //אם המערך ריק
         initUsers() //נאתחל את המערך
     //נחזיר מהמערך משתמש עם שם משתמש או מייל הזהה לפרמטר
-    return users.find(u=>u.username===nameOrMail || u.email===nameOrMail);
+    return users.find( u.email===nameOrMail);
 }
 
 

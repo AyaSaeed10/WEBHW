@@ -20,23 +20,21 @@ if (password !== confirmPassword) {
         return;
 }
 try {
- if(find(username)){
-      registerMessage.textContent = "Username or email already exists.";
+ if(find(email)){
+      registerMessage.textContent = "email already exists.";
       registerMessage.classList.remove("text-green-500");
       registerMessage.classList.add("text-red-500");
       return;
 }
 
-  const role = (users.length === 0) ? 'admin' : 'user';
-   add(username, email, password, dob, isAdmin);
+   add(username, email, password, dob);
 
 registerMessage.textContent = "Registration successful! (Data stored in local storage)";
 registerMessage.classList.remove("text-red-500");
 registerMessage.classList.add("text-green-500");
- if (role === 'admin') {
-          registerMessage.textContent += " — You are the ADMIN.";
-        }
-}catch(error){
+
+}
+catch(error){
 registerMessage.textContent = "An error occurred during registration.";
 registerMessage.classList.remove("text-green-500");
 registerMessage.classList.add("text-red-500");

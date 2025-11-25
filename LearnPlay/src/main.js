@@ -1,9 +1,5 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-//import { setupCounter } from './counter.js'
 
-function goToPage(target) 
-{
+function goToPage(target){
   switch (target) {
     case "login":
           window.location.href = "login.html";

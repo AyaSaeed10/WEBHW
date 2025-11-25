@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: "Inter", sans-serif; }
+    .progress-bar {
+      width: 0;
+      transition: width 1.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-[#F3F7F9] flex items-center justify-center min-h-screen">
+
+  <!-- DASHBOARD CONTAINER -->
+  <div class="flex w-full max-w-7xl shadow-2xl rounded-3xl overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="w-72 bg-gradient-to-b from-[#419D78] to-[#7EE081] text-white flex flex-col gap-5 p-8">
+      <h2 class="text-4xl font-extrabold mb-8">Menu</h2>
+
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">🗣️ Exercise Talking</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">📖 Exercise Reading</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">🎧 Exercise Listening</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">🔤 Enrich Vocabulary</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">🤖 Chat with Bot</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">👤 View Profile</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">📊 View Progress</button>
+      <button class="flex items-center gap-4 text-lg font-semibold hover:text-white hover:scale-105 transition">🛒 Shop</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-10 bg-[#E8F9FD] flex flex-col gap-10">
+
+      <!-- TOP BAR -->
+      <div class="flex justify-between items-center">
+        <h1 class="text-5xl font-extrabold text-[#419D78]">📊 Your Progress</h1>
+
+        <div class="flex items-center gap-5">
+          <div class="bg-white shadow-lg px-6 py-3 rounded-3xl flex items-center gap-2">
+            <span class="text-[#419D78] font-bold text-2xl">⭐ 120</span>
+          </div>
+          <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" class="w-16 h-16 rounded-2xl shadow-md" />
+        </div>
+      </div>
+
+      <!-- PROGRESS CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Talking -->
+        <div class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition">
+          <p class="text-2xl font-bold text-[#419D78] mb-3">🗣️ Talking</p>
+          <div class="w-full bg-gray-300 rounded-xl h-6">
+            <div class="progress-bar bg-[#7EE081] h-6 rounded-xl" style="width:60%;"></div>
+          </div>
+          <p class="mt-2 text-[#419D78] font-medium text-lg">60% Complete</p>
+        </div>
+
+        <!-- Reading -->
+        <div class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition">
+          <p class="text-2xl font-bold text-[#419D78] mb-3">📖 Reading</p>
+          <div class="w-full bg-gray-300 rounded-xl h-6">
+            <div class="progress-bar bg-[#7EE081] h-6 rounded-xl" style="width:45%;"></div>
+          </div>
+          <p class="mt-2 text-[#419D78] font-medium text-lg">45% Complete</p>
+        </div>
+
+        <!-- Listening -->
+        <div class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition">
+          <p class="text-2xl font-bold text-[#419D78] mb-3">🎧 Listening</p>
+          <div class="w-full bg-gray-300 rounded-xl h-6">
+            <div class="progress-bar bg-[#7EE081] h-6 rounded-xl" style="width:30%;"></div>
+          </div>
+          <p class="mt-2 text-[#419D78] font-medium text-lg">30% Complete</p>
+        </div>
+
+        <!-- Vocabulary -->
+        <div class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition">
+          <p class="text-2xl font-bold text-[#419D78] mb-3">🔤 Vocabulary</p>
+          <div class="w-full bg-gray-300 rounded-xl h-6">
+            <div class="progress-bar bg-[#7EE081] h-6 rounded-xl" style="width:80%;"></div>
+          </div>
+          <p class="mt-2 text-[#419D78] font-medium text-lg">80% Complete</p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Animate progress bars on load
+    window.addEventListener("load", () => {
+      document.querySelectorAll(".progress-bar").forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = "0";
+        setTimeout(() => bar.style.width = width, 100);
+      });
+    });
+  </script>
+
+</body>
+</html>

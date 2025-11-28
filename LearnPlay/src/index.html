@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>learnplay</title>
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <!--
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./LearnPlay/src/main.js"></script>
+  </body>
+-->
+  <body class="min-h-screen bg-[#E8F9FD] flex flex-col">
+
+    <!-- HEADER -->
+    <header class="bg-[#7EE081] py-5 shadow-md">
+      <div class="max-w-5xl mx-auto flex justify-between items-center px-4">
+        <h1 class="text-3xl font-extrabold text-white drop-shadow-sm">
+          PlayLearn English
+        </h1>
+
+        <nav class="flex gap-4">
+          <button type="button" onClick="goToPage('login')" class="bg-white px-4 py-2 rounded-full font-semibold text-[#419D78] hover:scale-105 transition">
+            Login
+          </button>
+          <button type="button" onclick="goToPage('Register')" class="bg-white px-4 py-2 rounded-full font-semibold text-[#FF6B6B] hover:scale-105 transition">
+            Register
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN HERO SECTION -->
+    <section class="flex flex-col items-center mt-12 text-center px-4">
+      <img 
+        src="https://cdn-icons-png.flaticon.com/512/4994/4994708.png"
+        class="w-40 drop-shadow-lg mb-6"
+        alt="Mascot"
+      />
+
+      <h2 class="text-4xl font-bold text-[#419D78]">
+        Learn English the Fun Way!
+      </h2>
+
+      <p class="mt-3 text-lg text-gray-600 max-w-xl">
+        Play games, practice vocabulary, listen to stories, and chat with our AI friend.
+      </p>
+
+      <button
+        class="mt-8 bg-[#7EE081] text-white px-10 py-4 rounded-full text-xl font-bold shadow-md hover:scale-105 transition"
+      >
+        Start Learning
+      </button>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="mt-16 max-w-5xl mx-auto px-4">
+      <h3 class="text-3xl font-bold text-[#419D78] text-center mb-8">
+        What You Can Do
+      </h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Feature 1 -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+          <img src="https://cdn-icons-png.flaticon.com/512/5293/5293973.png" class="w-20 mx-auto mb-3" />
+          <h4 class="text-xl font-bold text-[#419D78]">Choose Topic</h4>
+          <p class="text-gray-600 text-sm mt-1">Animals, Food, School & more</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+          <img src="https://cdn-icons-png.flaticon.com/512/1048/1048949.png" class="w-20 mx-auto mb-3" />
+          <h4 class="text-xl font-bold text-[#419D78]">Vocabulary Games</h4>
+          <p class="text-gray-600 text-sm mt-1">Translate, choose picture, complete sentence</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+          <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" class="w-20 mx-auto mb-3" />
+          <h4 class="text-xl font-bold text-[#419D78]">Listening</h4>
+          <p class="text-gray-600 text-sm mt-1">Hear English stories & words</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+          <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" class="w-20 mx-auto mb-3" />
+          <h4 class="text-xl font-bold text-[#419D78]">Reading</h4>
+          <p class="text-gray-600 text-sm mt-1">Short stories for kids</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+          <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" class="w-20 mx-auto mb-3" />
+          <h4 class="text-xl font-bold text-[#419D78]">Speaking</h4>
+          <p class="text-gray-600 text-sm mt-1">Practice pronunciation</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-white rounded-3xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" class="w-20 mx-auto mb-3" />
+          <h4 class="text-xl font-bold text-[#419D78]">Chat With Bot</h4>
+          <p class="text-gray-600 text-sm mt-1">Speak with your AI friend</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 py-6 bg-[#7EE081] text-center text-white font-semibold">
+      © 2025 PlayLearn English — Learn & Play!
+    </footer>
+    
+    <script src="./LearnPlay/src/main.js"></script>
+  </body>
+</html>

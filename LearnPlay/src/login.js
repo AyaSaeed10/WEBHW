@@ -21,12 +21,12 @@ if (usernameOrEmail === nameOrEmail && password === pass) {
         window.location.href = "chooseProfilePage.html";
         console.log("Choose Profiles Page");
 
-if (user && user.isAdmin) {
-  setTimeout(() => { window.location.href = 'userManagement.html'; }, 200);  
+if (user) {
+  setTimeout(() => { window.location.href = 'mainPageBest.html'; }, 200);  
 }
 
 } else {
-        loginMessage.textContent = 'Invalid username/email or password.';
+        loginMessage.textContent = 'Invalid email or password.';
         loginMessage.classList.remove('text-green-500');
         loginMessage.classList.add('text-red-500');
 }

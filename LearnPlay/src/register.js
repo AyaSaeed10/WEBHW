@@ -9,12 +9,20 @@ registerForm.addEventListener('submit', async(event)=> {
 const email = document.getElementById('mailInput').value;
 const password = document.getElementById('passInput').value;
 const confirmPassword = document.getElementById('confirmInput').value;
+const Pin = document.getElementById('PinInput').value;
+const confirmPinPassword = document.getElementById('confirmPinInput').value;
 const dob = document.getElementById('dateInput').value;
 registerMessage.textContent = "";
 
 
 if (password !== confirmPassword) {
         registerMessage.textContent = "Passwords do not match.";
+        registerMessage.classList.remove("text-green-500");
+        registerMessage.classList.add("text-red-500");
+        return;
+}
+if (Pin !== confirmPinPassword) {
+        registerMessage.textContent = "Pins do not match.";
         registerMessage.classList.remove("text-green-500");
         registerMessage.classList.add("text-red-500");
         return;
@@ -26,8 +34,9 @@ try {
       registerMessage.classList.add("text-red-500");
       return;
 }
+   const Profile=[];
+   add(username, email, password, dob, pin, profile = []) ;
 
-   add(username, email, password, dob);
 
 registerMessage.textContent = "Registration successful! (Data stored in local storage)";
 registerMessage.classList.remove("text-red-500");

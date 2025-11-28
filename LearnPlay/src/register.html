@@ -25,6 +25,27 @@
       <label for="confirmInput" class="block font-medium text-gray-700">Confirm Password</label>
       <input type="password" id="confirmInput" required class="w-full p-2 border border-gray-300 rounded">
 
+      <label for="pinInput" class="block font-medium text-gray-700">Pin</label>
+      <input
+      type="password"
+      id="pinInput"
+      required
+      maxlength="4"
+      pattern="\d{4}"
+      inputmode="numeric"
+      title="Pin must be exactly 4 digits"
+      class="w-full p-2 border border-gray-300 rounded">
+      <label for="confirmPinInput" class="block font-medium text-gray-700">Confirm Pin</label>
+<input 
+    type="password" 
+    id="confirmPinInput" 
+    required 
+    maxlength="4"
+    pattern="\d{4}" 
+    inputmode="numeric"
+    class="w-full p-2 border border-gray-300 rounded"
+>
+
       <label for="dateInput" class="block font-medium text-gray-700">Date of Birth</label>
       <input type="date" id="dateInput" required class="w-full p-2 border border-gray-300 rounded">
 
@@ -49,8 +70,8 @@
     </form>
   </div>
 
-  <script src="captcha.js"></script>
-  <script src="users.js"></script>
+<script src="users.js"></script>
+<script src="captcha.js"></script>
 
 </body>
 </html>

@@ -44,59 +44,91 @@ document.addEventListener('DOMContentLoaded', () => {
 }
     refreshArithmeticCaptchaButton.addEventListener('click', refreshCaptcha);
 
-    registerForm.addEventListener('submit', async(event)=> {
-	event.preventDefault();
-    if (incorrectAttempts >= maxIncorrectAttempts) {
-          captchaAttemptsError.classList.remove('hidden');
-          return;
-}
-    const username = document.getElementById('userInput').value;
-    const email = document.getElementById('mailInput').value;
-    const password = document.getElementById('passInput').value;
-    const confirmPassword = document.getElementById('confirmInput').value;
-    const dob = document.getElementById('dateInput').value;
-    registerMessage.textContent = "";
-    if (password !== confirmPassword) {
+   registerForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  if (incorrectAttempts >= maxIncorrectAttempts) {
+    captchaAttemptsError.classList.remove('hidden');
+    return;
+  }
+
+  const username = document.getElementById('userInput').value;
+  const email = document.getElementById('mailInput').value;
+  const password = document.getElementById('passInput').value;
+  const confirmPassword = document.getElementById('confirmInput').value;
+  const pin = document.getElementById('pinInput').value;
+  const confirmPinPassword = document.getElementById('confirmPinInput').value;
+  const dob = document.getElementById('dateInput').value;
+
+  registerMessage.textContent = "";
+  registerMessage.classList.remove("text-green-500", "text-red-500");
+
+  // 1. passwords match?
+  if (password !== confirmPassword) {
     registerMessage.textContent = "Passwords do not match.";
-    registerMessage.classList.remove("text-green-500");
     registerMessage.classList.add("text-red-500");
     return;
-}
-    let captchaCorrect = false;
-    const userAnswer = parseInt(arithmeticAnswerInput.value);
-    if (!isNaN(userAnswer) && userAnswer === arithmeticExpectedAnswer) {
-    try {
-    if(find(username)){
-    messageDiv.textContent = "Username or email already exists.";
-    messageDiv.classList.remove("text-green-500");
-    messageDiv.classList.add("text-red-500");
-    Return;
-    }
-    if (users.length < 1 || users == undefined)
-    isAdmin = true;
-    else
-    isAdmin = false;
-    add(username, email, password, dob, isAdmin);
-    registerMessage.textContent = "Registration successful!";
-    registerMessage.classList.remove("text-red-500");
-    registerMessage.classList.add("text-green-500");
-    document.getElementById('userInput').value="";
-    document.getElementById('mailInput').value="";
-    document.getElementById('passInput').value="";
-    document.getElementById('confirmInput').value="";
-    document.getElementById('dateInput').value="";        
-    }catch(error){
-    registerMessage.textContent = "An error occurred during registration.";
-    registerMessage.classList.remove("text-green-500");
+  }
+
+  // 2. pins match?
+  if (pin !== confirmPinPassword) {
+    registerMessage.textContent = "Pins do not match.";
     registerMessage.classList.add("text-red-500");
+    return;
+  }
+
+  // 3. pin is 4 digits only?
+  const pinRegex = /^\d{4}$/;
+  if (!pinRegex.test(pin)) {
+    registerMessage.textContent = "Pin must be exactly 4 digits (numbers only).";
+    registerMessage.classList.add("text-red-500");
+    return;
+  }
+
+  // 4. CAPTCHA check
+  const userAnswer = parseInt(arithmeticAnswerInput.value);
+  if (isNaN(userAnswer) || userAnswer !== arithmeticExpectedAnswer) {
+    arithmeticError.classList.remove('hidden');
+    incorrectAttempts++;
+    return;
+  }
+
+  // If captcha is correct:
+  arithmeticError.classList.add('hidden');
+  incorrectAttempts = 0;
+
+  try {
+    // 5. check if email already exists
+    if (find(email)) {
+      registerMessage.textContent = "Username or email already exists.";
+      registerMessage.classList.add("text-red-500");
+      return;
     }
 
+    // 6. ADD USER - profiles start as empty array
+    const profiles = [];
+    add(username, email, password, dob, pin, profiles);
 
-    incorrectAttempts = 0; //איפוס כמות ניסיונות שגויים
-    refreshCaptcha(); //ריענון חישוב אריתמטי
-    } else {
-    arithmeticError.classList.remove('hidden'); 
-    }
+    registerMessage.textContent = "Registration successful!";
+    registerMessage.classList.add("text-green-500");
 
-  } );
+    // clear form
+    document.getElementById('userInput').value = "";
+    document.getElementById('mailInput').value = "";
+    document.getElementById('passInput').value = "";
+    document.getElementById('confirmInput').value = "";
+    document.getElementById('pinInput').value = "";
+    document.getElementById('confirmPinInput').value = "";
+    document.getElementById('dateInput').value = "";
+    arithmeticAnswerInput.value = "";
+
+    refreshCaptcha(); // new captcha
+
+  } catch (error) {
+    console.error(error);
+    registerMessage.textContent = "An error occurred during registration.";
+    registerMessage.classList.add("text-red-500");
+  }
 });
+});
+

@@ -15,13 +15,10 @@ function initUsers() {
   }
   rawFile.send(null); // שליחת הבקשה
 }
-
-function find(nameOrMail){
-    if(users.length==0) //אם המערך ריק
-        initUsers() //נאתחל את המערך
-    //נחזיר מהמערך משתמש עם שם משתמש או מייל הזהה לפרמטר
-    return users.find( u.email===nameOrMail);
+function find(email) {
+    return users.some(u => u.email === email);
 }
+
 
 
 function updateData(){
@@ -40,12 +37,23 @@ function updateData(){
 }
 
 
-function add(username,email,password,dob,isAdmin){
-    //init users
-    initUsers()
-    //create new user and add to array
-let user = {"username":username, "email":email,"password":password,"dob":dob,"isAdmin":isAdmin}
-    users.push(user)
-    //update json file
-    updateData()
+function add(username, email, password, dob, pin, profiles = []) {
+    // load users from file
+    initUsers();
+
+    // create new user and add to array
+    const user = {
+        username: username,
+        email: email,
+        password: password,
+        dob: dob,
+        pin: pin,        
+        profiles: profiles 
+    };
+
+    users.push(user);
+
+    // update json file (download new version)
+    updateData();
 }
+
